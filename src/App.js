@@ -8,6 +8,7 @@ import ApolloClient, { InMemoryCache } from 'apollo-boost'
 import { ApolloProvider } from '@apollo/react-hooks'
 import { persistCache } from 'apollo-cache-persist'
 import { resolvers } from 'graph/resolvers/resolver';
+import endpoints from 'constants/endpoints';
 
 const Home = lazy(() => import('pages/Home'));
 const Details = lazy(() => import('pages/Details'));
@@ -15,6 +16,7 @@ const Details = lazy(() => import('pages/Details'));
 const cache = new InMemoryCache({})
 
 const client = new ApolloClient({
+    uri: endpoints.mainUri,
     cache: cache,
     countries: {
         defaults: [],

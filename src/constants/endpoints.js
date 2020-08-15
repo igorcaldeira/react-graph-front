@@ -1,5 +1,5 @@
 const endpoints = {
-  profile: 'http://localhost:3004/projects',
+  mainUri: 'https://countries-274616.ew.r.appspot.com',
 };
 
 export default endpoints;
