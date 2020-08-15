@@ -1,34 +1,18 @@
-import React, { Suspense, lazy } from 'react';
+import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom';
 import { ThemeProvider } from 'styled-components';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route
-} from "react-router-dom";
 import Base from 'components/template/Base';
 import theme from 'assets/style/theme';
 import * as serviceWorker from './serviceWorker';
+import App from './App';
 import './reset.css';
-
-const Home = lazy(() => import('pages/Home'));
-const Details = lazy(() => import('pages/Details'));
 
 ReactDOM.render(
   <React.StrictMode>
     <Suspense fallback={() => '...'} >
       <ThemeProvider theme={theme}>
         <Base>
-          <Router>
-            <Switch>
-              <Route path="/details">
-                <Details />
-              </Route>
-              <Route path="/">
-                <Home />
-              </Route>
-            </Switch>
-          </Router>
+          <App />
         </Base>
       </ThemeProvider>
     </Suspense>
