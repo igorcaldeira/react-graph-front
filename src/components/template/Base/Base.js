@@ -1,10 +1,10 @@
 import React from 'react';
 
-const base = () => (
+const Base = ({ children }) => (
   <>
     <p>Header</p>
     <p>{children}</p>
   </>
 );
 
-export default base;
+export default Base;
