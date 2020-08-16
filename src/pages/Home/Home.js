@@ -8,11 +8,7 @@ const Home = () => {
   const { data } = useQuery(LIST_COUNTRIES);
   const list = useMemo(() => flatCountries(data), [data]);
 
-  return (
-    <div>
-      <List list={list} />
-    </div>
-  );
+  return <List list={list} />;
 };
 
 export default Home;

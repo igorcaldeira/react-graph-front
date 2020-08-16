@@ -19,8 +19,11 @@ export const Content = styled.div`
     font-family: 'Catamaran', sans-serif;
   }
 
+  h1 {
+    font-size: 6rem;
+  }
+
   h3 {
     font-size: 2rem;
-    color: #f0f0f0;
   }
 `;

@@ -39,7 +39,7 @@ const App = () => {
     setupPersistence().finally(() => setHydrated(true));
   }, []);
 
-  if (!hydrated) return '...';
+  if (!hydrated) return null;
 
   return (
     <ApolloProvider client={client}>

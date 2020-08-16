@@ -19,19 +19,35 @@ export const LIST_COUNTRIES = gql`
 `;
 
 export const GET_COUNTRY = gql`
-  query {
+  query($id: String!) {
     Country(_id: $id) {
       name
+      capital
       area
       population
-      capital
-      demonym
       flag {
         svgFile
       }
-      distanceToOtherCountries(orderBy: distanceInKm_desc) {
-        distanceInKm
-        countryName
+      topLevelDomains {
+        name
+      }
+    }
+  }
+`;
+
+export const GET_CLOSEST_NEIGHBORS = gql`
+  query {
+    CallingCode {
+      countries {
+        name
+        location {
+          longitude
+          latitude
+        }
+        distanceToOtherCountries(first: 5, orderBy: distanceInKm_asc) {
+          countryName
+          distanceInKm
+        }
       }
     }
   }

@@ -1,10 +1,11 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { useQuery } from '@apollo/react-hooks';
 import { Link } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
-import { GET_COUNTRY } from 'graph/countries/countries.queries';
 import ROUTES from 'constants/routes';
+import CountryInfo from 'components/shared/CountryInfo';
+import { BsArrowLeft } from 'react-icons/bs';
+import { GoBack } from './Details.style';
 
 const fadeIn = {
   style: { y: 10, opacity: 0 },
@@ -14,26 +15,15 @@ const fadeIn = {
 
 const Details = () => {
   let { id } = useParams();
-  const { data } = useQuery(GET_COUNTRY, {
-    variables: { id: String(186) },
-  });
-
-  const country = data?.Country?.[0];
 
   return (
     <motion.div {...fadeIn}>
-      <h1>{country?.name}</h1>
-      <Link to={ROUTES.HOME}>Back</Link>
-      <div>
-        {country &&
-          Object.keys(country)
-            .filter((property) => typeof country[property] === 'string')
-            .map((prop) => (
-              <div key={prop}>
-                {prop}: {country[prop] || 'n/a'}
-              </div>
-            ))}
-      </div>
+      <GoBack>
+        <Link to={ROUTES.HOME}>
+          <BsArrowLeft />
+        </Link>
+      </GoBack>
+      {id && <CountryInfo id={id} />}
     </motion.div>
   );
 };

@@ -7,7 +7,7 @@ import * as serviceWorker from './serviceWorker';
 import App from './App';
 import './reset.css';
 
-const SuspenseFallback = () => <>...</>;
+const SuspenseFallback = () => null;
 
 ReactDOM.render(
   <React.StrictMode>

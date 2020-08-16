@@ -43,7 +43,7 @@ export const Input = styled.input`
   width: 100%;
   color: white;
   background-color: transparent;
-  font-size: 6rem;
+  font-size: 8rem;
   margin-bottom: ${(props) => props?.theme?.gap?.xl};
   border: none;
   border-bottom: white solid 0px;
