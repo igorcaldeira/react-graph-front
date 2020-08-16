@@ -1,48 +1,47 @@
-import React, { useMemo } from 'react'
-import { gql } from 'apollo-boost'
-import { useQuery } from '@apollo/react-hooks'
+import React, { useMemo } from 'react';
+import { gql } from 'apollo-boost';
+import { useQuery } from '@apollo/react-hooks';
+import List from 'components/shared/List';
 
-export const QUERY_COUNTRIES = gql`
-    query {
-      CallingCode {
+export const QUERY_LIST_COUNTRIES = gql`
+  query {
+    CallingCode {
+      _id
+      name
+      countries {
         _id
         name
-        countries {
+        capital
+        flag {
           _id
-          name
-          capital
-          flag {
-            _id
-            emoji
-          }
+          emoji
         }
       }
     }
-`
+  }
+`;
 
 const flatCountries = (data) => {
-    const newShapeData = data.CallingCode.map((callingCodeItem) => (
-        callingCodeItem.countries.map((country) => ({
-            key: country._id,
-            name: country.name,
-            capital: country.capital,
-            flag: country.flag.emoji,
-        }))
-    ));
-    return newShapeData.flat();
-}
+  const newShapeData = (data.CallingCode || []).map((callingCodeItem) =>
+    callingCodeItem.countries.map((country) => ({
+      key: country._id,
+      name: country.name,
+      capital: country.capital,
+      flag: country.flag.emoji,
+    }))
+  );
+  return newShapeData.flat();
+};
 
 const Home = () => {
-    const { data } = useQuery(QUERY_COUNTRIES);
-    const list = useMemo(() => flatCountries(data), data);
+  const { data } = useQuery(QUERY_LIST_COUNTRIES);
+  const list = useMemo(() => flatCountries(data), data);
 
-    return list.map(({ key, flag, name, capital }) => (
-                <div key={key}>
-                    {flag}
-                    {name}
-                    {capital}
-                </div>
-            ));
-}
+  return (
+    <div>
+      <List list={list} />
+    </div>
+  );
+};
 
 export default Home;
