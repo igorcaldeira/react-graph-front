@@ -1,4 +1,12 @@
 import React, { useState, Fragment } from 'react';
+import { motion } from 'framer-motion';
+import { SeeMore } from './ShowMore.style';
+
+const fadeIn = {
+  style: { opacity: 0 },
+  animate: { opacity: 1 },
+  transition: { delay: 0.7, duration: 0.4 },
+};
 
 const ShowMoreList = ({ list, count }) => {
   const [showUntil, changeCount] = useState(count);
@@ -15,9 +23,11 @@ const ShowMoreList = ({ list, count }) => {
         }}
       >
         {moreToShow > 0 && (
-          <div>
-            show {moreToShow} more of {list.length} items
-          </div>
+          <SeeMore>
+            <motion.div {...fadeIn}>
+              show {moreToShow} more of {list.length} items
+            </motion.div>
+          </SeeMore>
         )}
       </div>
     </>

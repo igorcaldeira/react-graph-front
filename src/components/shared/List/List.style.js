@@ -8,6 +8,13 @@ Item.Grid = styled.div`
   grid-template-rows: 1fr;
   gap: 0 2rem;
   grid-template-areas: 'flag desc desc';
+  margin-bottom: ${(props) => props?.theme?.gap?.lg};
+  cursor: pointer;
+
+  p {
+    margin-top: ${(props) => props?.theme?.gap?.md};
+    margin-bottom: ${(props) => props?.theme?.gap?.md};
+  }
 `;
 
 Item.Flag = styled.img`
@@ -17,6 +24,19 @@ Item.Flag = styled.img`
 
 Item.Description = styled.div`
   grid-area: desc;
+  position: relative;
+
+  span {
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+
+    div {
+      font-size: 0.7rem;
+      color: white;
+    }
+  }
 `;
 
 export { Item };

@@ -13,10 +13,19 @@ export const Content = styled.div`
   font-family: Arial, Helvetica, sans-serif;
   font-size: 19px;
 
-  h1 {
+  h1,
+  h3 {
     font-family: 'Catamaran', sans-serif;
+  }
+
+  h1 {
     font-size: 6rem;
-    color: white;
+    margin-bottom: ${(props) => props?.theme?.gap?.xl};
     padding-bottom: ${(props) => props?.theme?.gap?.xl};
+  }
+
+  h3 {
+    font-size: 2rem;
+    color: #f0f0f0;
   }
 `;

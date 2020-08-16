@@ -3,10 +3,7 @@ import { Wrapper, Content } from './Base.style';
 
 const Base = ({ children }) => (
   <Wrapper>
-    <Content>
-      <h1>Country search</h1>
-      {children}
-    </Content>
+    <Content>{children}</Content>
   </Wrapper>
 );
 
