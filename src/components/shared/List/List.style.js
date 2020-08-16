@@ -39,4 +39,24 @@ Item.Description = styled.div`
   }
 `;
 
+export const Input = styled.input`
+  width: 100%;
+  color: white;
+  background-color: transparent;
+  font-size: 6rem;
+  margin-bottom: ${(props) => props?.theme?.gap?.xl};
+  border: none;
+  border-bottom: white solid 0px;
+  transition: border-bottom ease-in 100ms;
+
+  &:focus {
+    outline: none;
+    border-bottom: white solid 2px;
+  }
+
+  &::placeholder {
+    color: white;
+  }
+`;
+
 export { Item };

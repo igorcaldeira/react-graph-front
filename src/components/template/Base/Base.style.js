@@ -14,14 +14,9 @@ export const Content = styled.div`
   font-size: 19px;
 
   h1,
-  h3 {
+  h3,
+  input {
     font-family: 'Catamaran', sans-serif;
-  }
-
-  h1 {
-    font-size: 6rem;
-    margin-bottom: ${(props) => props?.theme?.gap?.xl};
-    padding-bottom: ${(props) => props?.theme?.gap?.xl};
   }
 
   h3 {
