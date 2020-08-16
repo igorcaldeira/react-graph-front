@@ -1,5 +1,5 @@
-const endpoints = {
-  mainUri: 'https://countries-274616.ew.r.appspot.com',
+const ENDPOINTS = {
+  URI: 'https://countries-274616.ew.r.appspot.com',
 };
 
-export default endpoints;
+export default ENDPOINTS;

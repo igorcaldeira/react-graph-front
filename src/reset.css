@@ -1,6 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Catamaran:wght@900&display=swap');
+
 html {
   font-size: 62.5%; /* Now 10px = 1rem! */
-  background-color: #dae3e7;
+  background-color: #1d1d1d;
+  color: white;
 }
 
 body {
@@ -168,4 +171,24 @@ mark {
   background-color: transparent;
   font-weight: bold;
   color: inherit;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 3px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px rgb(37, 37, 37);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: white;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #0044ff;
 }

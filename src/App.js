@@ -4,7 +4,8 @@ import ApolloClient, { InMemoryCache } from 'apollo-boost';
 import { ApolloProvider } from '@apollo/react-hooks';
 import { persistCache } from 'apollo-cache-persist';
 import { resolvers } from 'graph/resolvers';
-import endpoints from 'constants/endpoints';
+import ENDPOINTS from 'constants/endpoints';
+import ROUTES from 'constants/routes';
 
 const Home = lazy(() => import('pages/Home'));
 const Details = lazy(() => import('pages/Details'));
@@ -12,7 +13,7 @@ const Details = lazy(() => import('pages/Details'));
 const cache = new InMemoryCache({});
 
 const client = new ApolloClient({
-  uri: endpoints.mainUri,
+  uri: ENDPOINTS.URI,
   cache: cache,
   countries: {
     defaults: [],
@@ -38,16 +39,16 @@ const App = () => {
     setupPersistence().finally(() => setHydrated(true));
   }, []);
 
-  if (!hydrated) return <p>loading our persisted cache...</p>;
+  if (!hydrated) return '...';
 
   return (
     <ApolloProvider client={client}>
       <Router>
         <Switch>
-          <Route path="/details/:id">
+          <Route path={`${ROUTES.DETAILS}:id`}>
             <Details />
           </Route>
-          <Route path="/">
+          <Route path={ROUTES.HOME}>
             <Home />
           </Route>
         </Switch>

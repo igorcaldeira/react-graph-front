@@ -1,10 +1,13 @@
 import React from 'react';
+import { Wrapper, Content } from './Base.style';
 
 const Base = ({ children }) => (
-  <>
-    <p>Header</p>
-    <p>{children}</p>
-  </>
+  <Wrapper>
+    <Content>
+      <h1>Country search</h1>
+      {children}
+    </Content>
+  </Wrapper>
 );
 
 export default Base;

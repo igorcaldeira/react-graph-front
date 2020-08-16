@@ -7,9 +7,11 @@ import * as serviceWorker from './serviceWorker';
 import App from './App';
 import './reset.css';
 
+const SuspenseFallback = () => <>...</>;
+
 ReactDOM.render(
   <React.StrictMode>
-    <Suspense fallback={() => '...'} >
+    <Suspense fallback={<SuspenseFallback />}>
       <ThemeProvider theme={theme}>
         <Base>
           <App />
