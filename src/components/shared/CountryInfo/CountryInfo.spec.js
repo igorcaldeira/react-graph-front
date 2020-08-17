@@ -4,66 +4,20 @@ import '@testing-library/jest-dom/extend-expect';
 import { ApolloProvider } from '@apollo/react-hooks';
 import { createMockClient } from 'mock-apollo-client';
 import { GET_COUNTRY, GET_CLOSEST_NEIGHBORS } from 'graph/countries/countries.queries';
+import { countryMock } from 'assets/mocks/country';
+import { neighbourMock } from 'assets/mocks/neighbours';
 import CountryInfo from './CountryInfo';
 
 describe('CountryInfo component ', () => {
   const mockClient = createMockClient();
   const mutationHandler = jest.fn().mockResolvedValue({
     loading: false,
-    data: {
-      Country: [
-        {
-          name: 'lorem',
-          capital: 'lorem',
-          area: 'lorem',
-          population: 'lorem',
-          flag: { svgFile: 'lorem' },
-          topLevelDomains: [{ name: 'lorem' }],
-        },
-      ],
-    },
+    data: countryMock,
   });
 
   const mutationMapHandler = jest.fn().mockResolvedValue({
     loading: false,
-    data: {
-      CallingCode: [
-        {
-          countries: [
-            {
-              name: 'lorem',
-              location: {
-                latitude: 33,
-                longitude: 65,
-              },
-              distanceToOtherCountries: [
-                {
-                  countryName: 'lorem2',
-                  distanceInKm: 1,
-                },
-              ],
-            },
-          ],
-        },
-        {
-          countries: [
-            {
-              name: 'lorem2',
-              location: {
-                latitude: 33,
-                longitude: 65,
-              },
-              distanceToOtherCountries: [
-                {
-                  countryName: 'lorem',
-                  distanceInKm: 1,
-                },
-              ],
-            },
-          ],
-        },
-      ],
-    },
+    data: neighbourMock,
   });
 
   mockClient.setRequestHandler(GET_COUNTRY, mutationHandler);

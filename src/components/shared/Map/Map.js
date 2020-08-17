@@ -3,6 +3,7 @@ import { useQuery } from '@apollo/react-hooks';
 import MapGL, { Marker } from 'react-map-gl';
 import { GET_CLOSEST_NEIGHBORS } from 'graph/countries/countries.queries';
 import Loading from 'components/shared/Loading';
+import { extractOriginCountry, collectNeighboursFullData } from 'lib/countries';
 
 const defaultViewport = {
   width: '100%',
@@ -12,17 +13,17 @@ const defaultViewport = {
   zoom: 4,
 };
 
+const mapStyle = 'mapbox://styles/mapbox/dark-v8';
+const token = process.env.REACT_APP_MAP_TOKEN;
+
 const Map = ({ countryName }) => {
   const [viewport, setViewPort] = useState(defaultViewport);
   const { loading, data } = useQuery(GET_CLOSEST_NEIGHBORS);
+  const originCountry = extractOriginCountry(data, countryName);
+  const neighborsNameList = (originCountry?.distanceToOtherCountries || []).map((n) => n.countryName);
+  const neighborsFullData = collectNeighboursFullData(data, neighborsNameList);
 
   const _onViewportChange = (viewport) => setViewPort({ ...viewport, transitionDuration: 1 });
-
-  const originCountry = data?.CallingCode?.find((c) => c.countries.find((country) => country?.name === countryName))?.countries?.[0];
-  const neighborsNameList = (originCountry?.distanceToOtherCountries || []).map((n) => n.countryName);
-  const neighborsFullData = data?.CallingCode?.filter((c) => neighborsNameList.includes(c.countries?.[0]?.name)).map(
-    (c) => c?.countries?.[0]
-  );
 
   useEffect(() => {
     if (originCountry?.location) {
@@ -34,9 +35,6 @@ const Map = ({ countryName }) => {
       );
     }
   }, [loading]);
-
-  const mapStyle = 'mapbox://styles/mapbox/dark-v8';
-  const token = process.env.REACT_APP_MAP_TOKEN;
 
   return loading ? (
     <Loading />

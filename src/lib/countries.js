@@ -11,3 +11,11 @@ export const flatCountries = (data) => {
   );
   return _.uniqBy(newShapeData.flat(), 'key');
 };
+
+export const extractOriginCountry = (fullData, countryName) => {
+  return fullData?.CallingCode?.find((c) => c.countries.find((country) => country?.name === countryName))?.countries?.[0];
+};
+
+export const collectNeighboursFullData = (fullData, neighborsNameList) => {
+  return fullData?.CallingCode?.filter((c) => neighborsNameList.includes(c.countries?.[0]?.name)).map((c) => c?.countries?.[0]);
+};

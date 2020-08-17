@@ -4,50 +4,14 @@ import '@testing-library/jest-dom/extend-expect';
 import { ApolloProvider } from '@apollo/react-hooks';
 import { createMockClient } from 'mock-apollo-client';
 import { GET_CLOSEST_NEIGHBORS } from 'graph/countries/countries.queries';
+import { neighbourMock } from 'assets/mocks/neighbours';
 import Map from './Map';
 
 describe('Map component ', () => {
   const mockClient = createMockClient();
   const mutationHandler = jest.fn().mockResolvedValue({
     loading: false,
-    data: {
-      CallingCode: [
-        {
-          countries: [
-            {
-              name: 'lorem',
-              location: {
-                latitude: 33,
-                longitude: 65,
-              },
-              distanceToOtherCountries: [
-                {
-                  countryName: 'lorem2',
-                  distanceInKm: 1,
-                },
-              ],
-            },
-          ],
-        },
-        {
-          countries: [
-            {
-              name: 'lorem2',
-              location: {
-                latitude: 33,
-                longitude: 65,
-              },
-              distanceToOtherCountries: [
-                {
-                  countryName: 'lorem',
-                  distanceInKm: 1,
-                },
-              ],
-            },
-          ],
-        },
-      ],
-    },
+    data: neighbourMock,
   });
 
   mockClient.setRequestHandler(GET_CLOSEST_NEIGHBORS, mutationHandler);

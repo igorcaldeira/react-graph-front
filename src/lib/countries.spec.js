@@ -1,31 +1,31 @@
 import { flatCountries } from './countries';
 
-describe('Verify flatCountries function', () => {
-  it('Should simplify the original list', () => {
-    const input = {
-      CallingCode: [
+const input = {
+  CallingCode: [
+    {
+      countries: [
         {
-          countries: [
-            {
-              _id: 123,
-              name: 'lorem',
-              capital: 'lorem',
-              flag: { svgFile: 'lorem' },
-            },
-          ],
+          _id: 123,
+          name: 'lorem',
+          capital: 'lorem',
+          flag: { svgFile: 'lorem' },
         },
       ],
-    };
+    },
+  ],
+};
 
-    const output = [
-      {
-        key: 123,
-        name: 'lorem',
-        capital: 'lorem',
-        flag: 'lorem',
-      },
-    ];
+const output = [
+  {
+    key: 123,
+    name: 'lorem',
+    capital: 'lorem',
+    flag: 'lorem',
+  },
+];
 
+describe('Verify flatCountries function', () => {
+  it('Should simplify the original list', () => {
     expect(flatCountries(input)).toStrictEqual(output);
   });
 });
