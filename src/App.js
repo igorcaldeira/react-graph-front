@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import ApolloClient, { InMemoryCache } from 'apollo-boost';
 import { ApolloProvider } from '@apollo/react-hooks';
 import { persistCache } from 'apollo-cache-persist';
-import { resolvers } from 'graph/resolvers';
 import ENDPOINTS from 'constants/endpoints';
 import ROUTES from 'constants/routes';
 import { ThemeProvider } from 'styled-components';
@@ -17,7 +16,7 @@ const cache = new InMemoryCache({});
 
 const client = new ApolloClient({
   uri: ENDPOINTS.URI,
-  cache: cache,
+  cache,
 });
 
 const SuspenseFallback = () => null;

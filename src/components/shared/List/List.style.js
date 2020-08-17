@@ -10,10 +10,23 @@ Item.Grid = styled.div`
   grid-template-areas: 'flag desc desc';
   margin-bottom: ${(props) => props?.theme?.gap?.lg};
   cursor: pointer;
+  transition: font-size ease-in 200ms;
 
   p {
     margin-top: ${(props) => props?.theme?.gap?.md};
     margin-bottom: ${(props) => props?.theme?.gap?.md};
+  }
+
+  h3 {
+    font-size: 1.3rem;
+    transition: font-size ease-in 200ms;
+  }
+
+  &:hover {
+    h3 {
+      font-size: 2.4rem;
+    }
+    font-size: 1.1rem;
   }
 `;
 
@@ -43,7 +56,7 @@ export const Input = styled.input`
   width: 100%;
   color: white;
   background-color: transparent;
-  font-size: 8rem;
+  font-size: 2rem;
   margin-bottom: ${(props) => props?.theme?.gap?.xl};
   border: none;
   border-bottom: white solid 0px;
@@ -56,6 +69,10 @@ export const Input = styled.input`
 
   &::placeholder {
     color: white;
+  }
+
+  @media (min-width: 1281px) {
+    font-size: 8rem;
   }
 `;
 

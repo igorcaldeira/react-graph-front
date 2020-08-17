@@ -27,11 +27,11 @@ const ListItem = ({ id, flag, name, capital, listOrder }) => {
   return (
     <motion.div {...fadeInSlidingUp(delay)}>
       <Item.Grid onClick={() => history.push(`${ROUTES.DETAILS}${id}`)}>
-        <Item.Flag src={flag} />
+        <Item.Flag src={flag} alt={`${name} country flag`} />
         <Item.Description>
           <span>
             <h3>{name}</h3>
-            <p>{capital}</p>
+            <p>{capital} capital</p>
             <div>click to see more</div>
           </span>
         </Item.Description>

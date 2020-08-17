@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useQuery } from '@apollo/react-hooks';
 import MapGL, { Marker } from 'react-map-gl';
 import { GET_CLOSEST_NEIGHBORS } from 'graph/countries/countries.queries';
+import Loading from 'components/shared/Loading';
 
 const defaultViewport = {
   width: '100%',
@@ -15,11 +16,9 @@ const Map = ({ countryName }) => {
   const [viewport, setViewPort] = useState(defaultViewport);
   const { loading, data } = useQuery(GET_CLOSEST_NEIGHBORS);
 
-  const tk = 'pk.eyJ1IjoiaWdvcmNhbGRlaXJhIiwiYSI6ImNrZHhmajl6eDMyZTkyc3FxM2hmcDVpMWMifQ.Abwo8jsqUgVXOEa3zeh0Og';
-
   const _onViewportChange = (viewport) => setViewPort({ ...viewport, transitionDuration: 1 });
 
-  const originCountry = data?.CallingCode?.find((c) => c.countries?.[0]?.name === countryName)?.countries?.[0];
+  const originCountry = data?.CallingCode?.find((c) => c.countries.find((country) => country?.name === countryName))?.countries?.[0];
   const neighborsNameList = (originCountry?.distanceToOtherCountries || []).map((n) => n.countryName);
   const neighborsFullData = data?.CallingCode?.filter((c) => neighborsNameList.includes(c.countries?.[0]?.name)).map(
     (c) => c?.countries?.[0]
@@ -36,23 +35,26 @@ const Map = ({ countryName }) => {
     }
   }, [loading]);
 
+  const mapStyle = 'mapbox://styles/mapbox/dark-v8';
+  const token = process.env.REACT_APP_MAP_TOKEN;
+
   return loading ? (
-    'Loading map and neighborsm, please wait.'
+    <Loading />
   ) : (
     <>
       <h3>Nearest neighbords of {countryName}</h3>
-      {neighborsFullData.map((n) => (
+      {neighborsFullData.map((n, position) => (
         <p key={n.name}>
-          {n.name} {n.location.longitude} {n.location.latitude}
+          {position + 1}º {n.name} (lat {n.location.longitude}; long {n.location.latitude})
         </p>
       ))}
-      <MapGL {...viewport} mapboxApiAccessToken={tk} mapStyle="mapbox://styles/mapbox/dark-v8" onViewportChange={_onViewportChange}>
+      <MapGL {...viewport} mapboxApiAccessToken={token} mapStyle={mapStyle} onViewportChange={_onViewportChange}>
         <Marker longitude={originCountry.location.longitude} latitude={originCountry.location.latitude}>
           {originCountry.name}
         </Marker>
-        {neighborsFullData.map((n) => (
-          <Marker key={n.name} offsetLeft={0} offsetTop={0} longitude={n.location.longitude} latitude={n.location.latitude}>
-            {n.name}
+        {neighborsFullData.map(({ name, location }) => (
+          <Marker key={name} longitude={location.longitude} latitude={location.latitude}>
+            {name}
           </Marker>
         ))}
       </MapGL>

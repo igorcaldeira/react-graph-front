@@ -11,7 +11,7 @@ export const Content = styled.div`
   padding-top: 10rem;
   padding-bottom: ${(props) => props?.theme?.gap?.xl};
   font-family: Arial, Helvetica, sans-serif;
-  font-size: 19px;
+  font-size: 1rem;
 
   h1,
   h3,
@@ -19,11 +19,14 @@ export const Content = styled.div`
     font-family: 'Catamaran', sans-serif;
   }
 
-  h1 {
-    font-size: 6rem;
+  h3 {
+    font-size: 1.3rem;
   }
 
-  h3 {
-    font-size: 2rem;
+  @media (min-width: 1281px) {
+    font-size: 1rem;
+    h3 {
+      font-size: 2rem;
+    }
   }
 `;

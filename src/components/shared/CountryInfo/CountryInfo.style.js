@@ -8,6 +8,7 @@ export const TitleWithFlagBackground = styled.h1`
   -webkit-background-clip: text;
   background-clip: text;
   padding-top: 1.5rem;
+  font-size: 6rem;
 `;
 
 export const DetailsContent = styled.div`

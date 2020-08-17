@@ -16,8 +16,8 @@ const CountryInfo = ({ id }) => {
     capital,
     area,
     population,
-    flag: { svgFile },
     topLevelDomains,
+    flag: { svgFile },
   } = data?.Country?.[0];
 
   return (
