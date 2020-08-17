@@ -18,7 +18,6 @@ const CountryInfo = ({ id }) => {
     population,
     flag: { svgFile },
     topLevelDomains,
-    distanceToOtherCountries,
   } = data?.Country?.[0];
 
   return (
@@ -33,10 +32,8 @@ const CountryInfo = ({ id }) => {
           <p>Area - {area}</p>
           <p>Population - {population}</p>
           <p>Top level domains - {topLevelDomains.map((d) => d.name).join('/ ')}</p>
-        </DetailsContent>
-        <div>
           <Map countryName={name} />
-        </div>
+        </DetailsContent>
       </>
     )
   );

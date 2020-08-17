@@ -8,7 +8,7 @@ const defaultViewport = {
   height: 400,
   latitude: 0,
   longitude: 0,
-  zoom: 3,
+  zoom: 4,
 };
 
 const Map = ({ countryName }) => {
@@ -26,7 +26,7 @@ const Map = ({ countryName }) => {
   );
 
   useEffect(() => {
-    if (originCountry.location) {
+    if (originCountry?.location) {
       setViewPort(
         Object.assign({}, defaultViewport, {
           latitude: originCountry.location.latitude,
@@ -36,29 +36,27 @@ const Map = ({ countryName }) => {
     }
   }, [loading]);
 
-  return (
-    !loading && (
-      <section>
-        <h3>Nearest neighbords of {countryName}</h3>
-        <div>
-          {neighborsFullData.map((n) => (
-            <p>
-              {n.name} {n.location.longitude} {n.location.latitude}
-            </p>
-          ))}
-        </div>
-        <MapGL {...viewport} mapboxApiAccessToken={tk} mapStyle="mapbox://styles/mapbox/dark-v8" onViewportChange={_onViewportChange}>
-          <Marker longitude={originCountry.location.longitude} latitude={originCountry.location.latitude}>
-            {originCountry.name}
+  return loading ? (
+    'Loading map and neighborsm, please wait.'
+  ) : (
+    <>
+      <h3>Nearest neighbords of {countryName}</h3>
+      {neighborsFullData.map((n) => (
+        <p key={n.name}>
+          {n.name} {n.location.longitude} {n.location.latitude}
+        </p>
+      ))}
+      <MapGL {...viewport} mapboxApiAccessToken={tk} mapStyle="mapbox://styles/mapbox/dark-v8" onViewportChange={_onViewportChange}>
+        <Marker longitude={originCountry.location.longitude} latitude={originCountry.location.latitude}>
+          {originCountry.name}
+        </Marker>
+        {neighborsFullData.map((n) => (
+          <Marker key={n.name} offsetLeft={0} offsetTop={0} longitude={n.location.longitude} latitude={n.location.latitude}>
+            {n.name}
           </Marker>
-          {neighborsFullData.map((n) => (
-            <Marker offsetLeft={0} offsetTop={0} longitude={n.location.longitude} latitude={n.location.latitude}>
-              {n.name}
-            </Marker>
-          ))}
-        </MapGL>
-      </section>
-    )
+        ))}
+      </MapGL>
+    </>
   );
 };
 export default Map;
